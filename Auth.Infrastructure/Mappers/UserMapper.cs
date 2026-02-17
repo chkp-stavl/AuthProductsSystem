@@ -22,11 +22,12 @@ namespace Auth.Infrastructure.Mappers
         public static User ToDomain(AppUser entity)
         {
             return new User(
-               entity.UserName,
+                entity.Id,
+                entity.UserName,
                 entity.PasswordHash,
                 (UserRole)entity.Role,
-                entity.CreatedAt
-            );
+                entity.CreatedAt,
+                entity.LastLogin);
         }
     }
 }

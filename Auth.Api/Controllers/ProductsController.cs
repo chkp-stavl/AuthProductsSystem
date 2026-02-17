@@ -1,7 +1,7 @@
-﻿using Auth.Core.DTOs;
-using Auth.Core.Entities;
+﻿using Auth.Api.Common;
+using Auth.Core.Common.Auth.Api.Common;
+using Auth.Core.DTOs;
 using Auth.Core.Services;
-using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,81 +20,156 @@ namespace Auth.Api.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> GetProudcts([FromQuery] string? name,
-    [FromQuery] int? categoryId)
+        public async Task<IActionResult> GetProudcts(
+            [FromQuery] string? name,
+            [FromQuery] int? categoryId)
         {
-            var result = await _service.GetProudctsAsync(name, categoryId);
-
-            if (!result.IsSuccess)
+            try
             {
-                return BadRequest(result);
+                var result =
+                    await _service
+                        .GetProudctsAsync(name, categoryId);
+
+                if (!result.IsSuccess)
+                    return BadRequest(result);
+
+                return Ok(result);
             }
-
-            return Ok(result);
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateProductRequest req)
-        {
-
-            var result = await _service.CreateAsync(req);
-
-            if (!result.IsSuccess)
+            catch
             {
-                return BadRequest(result);
+                return StatusCode(
+                    500,
+                    new
+                    {
+                        message = ErrorMessages.UnexpectedError
+                    });
             }
-                
-
-            return Ok(result);
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpDelete("{id:guid}")]
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            var result = await _service.DeleteAsync(id);
-
-            if (!result.IsSuccess)
-                return NotFound(result);
-
-            return NoContent();
-        }
-
-
-        [Authorize(Roles = "Admin")]
-        [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Update(Guid id, UpdateProductRequest req)
-        {
-            var result = await _service.UpdateAsync(id, req);
-
-            if (!result.IsSuccess)
-                return BadRequest(result);
-
-            return Ok(result);
         }
 
         [Authorize]
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _service.GetByIdAsync(id);
-
-            if (result == null)
+            try
             {
-                return NotFound(result);
-            }
-               
+                var result =
+                    await _service.GetByIdAsync(id);
 
-            return Ok(result);
+                if (!result.IsSuccess)
+                    return NotFound(result);
+
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(
+                    500,
+                    new
+                    {
+                        message = ErrorMessages.UnexpectedError
+                    });
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> Create(
+            CreateProductRequest req)
+        {
+            try
+            {
+                var result =
+                    await _service.CreateAsync(req);
+
+                if (!result.IsSuccess)
+                    return BadRequest(result);
+
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(
+                    500,
+                     new
+                     {
+                         message = ErrorMessages.UnexpectedError
+                     });
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> Update(
+            Guid id,
+            UpdateProductRequest req)
+        {
+            try
+            {
+                var result =
+                    await _service.UpdateAsync(id, req);
+
+                if (!result.IsSuccess)
+                    return BadRequest(result);
+
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(
+                    500,
+                     new
+                     {
+                         message = ErrorMessages.UnexpectedError
+                     });
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                var result =
+                    await _service.DeleteAsync(id);
+
+                if (!result.IsSuccess)
+                    return NotFound(result);
+
+                return NoContent();
+            }
+            catch
+            {
+                return StatusCode(
+                    500,
+                    new
+                    {
+                        message = ErrorMessages.UnexpectedError
+                    });
+            }
         }
 
         [Authorize]
         [HttpGet("form-data")]
         public async Task<IActionResult> GetFormData()
         {
-            var result = await _service.GetProductFormDataAsync();
-            return Ok(result);
+            try
+            {
+                var result =
+                    await _service
+                        .GetProductFormDataAsync();
+
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(
+                    500,
+                    new
+                    {
+                        message =ErrorMessages.UnexpectedError
+                    });
+            }
         }
     }
 }

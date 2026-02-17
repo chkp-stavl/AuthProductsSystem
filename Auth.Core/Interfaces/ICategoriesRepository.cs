@@ -1,10 +1,4 @@
-﻿using Auth.Core.DTOs;
-using Auth.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Auth.Core.Entities;
 
 namespace Auth.Core.Interfaces
 {

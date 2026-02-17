@@ -1,10 +1,5 @@
 ﻿using Auth.Core.Common;
 using Auth.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Auth.Core.DTOs
 {
@@ -12,8 +7,8 @@ namespace Auth.Core.DTOs
     {
         public Product? Data { get; }
 
-        private ProductCreateResponse(bool success, Product? product = null, string? message = null)
-            : base(success, message)
+        private ProductCreateResponse(bool isSuccess, Product? product = null, string? message = null)
+            : base(isSuccess, message)
         {
             Data = product;
         }

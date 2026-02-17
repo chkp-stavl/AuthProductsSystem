@@ -1,9 +1,4 @@
 ﻿using Auth.Core.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Auth.Core.DTOs
 {
@@ -15,8 +10,8 @@ namespace Auth.Core.DTOs
         public bool IsCanEdit { get; private set; }
         public string? Token { get; private set; }
 
-        private LoginResponse(bool success, string? message = null)
-            : base(success, message) { }
+        private LoginResponse(bool isSuccess, string? message = null)
+            : base(isSuccess, message) { }
 
         public static LoginResponse Success(Guid id, string userName, bool isCanEdit, string token)
         {

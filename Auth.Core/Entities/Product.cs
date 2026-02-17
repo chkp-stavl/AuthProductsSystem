@@ -1,6 +1,4 @@
-﻿using Auth.Core.Enums;
-
-namespace Auth.Core.Entities;
+﻿namespace Auth.Core.Entities;
 
 public class Product
 {

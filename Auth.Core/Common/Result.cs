@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Auth.Core.Common
+﻿namespace Auth.Core.Common
 {
     public class Result<T>
     {
-        public bool Success { get; }
+        public bool IsSuccess { get; }
         public string? Error { get; }
         public T? Value { get; }
 
-        private Result(bool success, T? value, string? error)
+        private Result(bool isSuccess, T? value, string? error)
         {
-            Success = success;
+            IsSuccess = isSuccess;
             Value = value;
             Error = error;
         }

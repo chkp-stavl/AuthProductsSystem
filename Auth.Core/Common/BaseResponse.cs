@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Auth.Core.Common
+﻿namespace Auth.Core.Common
 {
 
     public class BaseResponse
@@ -12,9 +6,9 @@ namespace Auth.Core.Common
         public bool IsSuccess { get; }
         public string? Message { get; }
 
-        protected BaseResponse(bool success, string? message = null)
+        protected BaseResponse(bool isSuccess, string? message = null)
         {
-            IsSuccess = success;
+            IsSuccess = isSuccess;
             Message = message;
         }
 
