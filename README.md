@@ -60,3 +60,39 @@ For SQL Server:
 
 ---
 
+## Environment Variables (.env)
+
+The project uses a `.env` file for JWT configuration.
+
+Example `.env` file:
+
+JWT_KEY=ULTRA_SECURE_RANDOM_SECRET_8f3KzXP9LmQaZ7sTyBvH4eR6wN0uC
+JWT_ISSUER=Auth.Api
+JWT_AUDIENCE=AngularClient
+JWT_ACCESS_TOKEN_MINUTES=120
+
+---
+
+### Explanation
+
+- JWT_KEY – Secret key used to sign JWT tokens
+- JWT_ISSUER – Token issuer
+- JWT_AUDIENCE – Intended audience
+- JWT_ACCESS_TOKEN_MINUTES – Access token expiration time in minutes
+
+---
+
+### Important
+
+The `.env` file should NOT be committed to source control.
+
+Add it to `.gitignore`:
+
+.env
+
+---
+
+### Creating Your Own .env
+
+Create a file named `.env` inside the `Auth.Api` project folder and define your own secure JWT key.
+
