@@ -1,4 +1,50 @@
 
+## API Endpoints
+
+The system exposes REST APIs for authentication and product management.
+
+### Authentication
+
+**POST `/api/auth/login`**  
+Authenticates a user using username and password.  
+On success, a JWT token is generated and stored in an HttpOnly cookie.  
+Returns basic user information and permission flag.
+
+**GET `/api/auth/me`**  
+Returns information about the currently authenticated user.  
+Requires a valid JWT cookie.
+
+**POST `/api/auth/logout`**  
+Clears the authentication cookie and logs the user out.
+
+---
+
+### Products
+
+**GET `/api/products`**  
+Returns a list of products.  
+Supports optional query parameters: `name`, `categoryId`.  
+Authentication required.
+
+**GET `/api/products/{id}`**  
+Returns a product by its ID.  
+Authentication required.
+
+**POST `/api/products`**  
+Creates a new product.  
+Requires `Admin` role.
+
+**PUT `/api/products/{id}`**  
+Updates an existing product.  
+Requires `Admin` role.
+
+**DELETE `/api/products/{id}`**  
+Deletes a product.  
+Requires `Admin` role.
+
+**GET `/api/products/form-data`**  
+Returns supporting data (such as categories) required for product creation forms.  
+Authentication required.
 
 ## Database Setup
 
